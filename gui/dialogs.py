@@ -1,13 +1,13 @@
 from PySide6 import QtCore, QtGui, QtWidgets
 from PySide6 import QtWebEngineWidgets
-
+import platform
 import os
 import numpy as np
 import cv2
 import traceback
 import logging
 import open3d as o3d
-import win32gui, win32con
+#import win32gui, win32con
 import sys
 from PIL import Image
 # import matplotlib.pyplot as plt
@@ -21,7 +21,9 @@ from PIL import Image
 import resources as res
 from gui import widgets as wid
 from tools import thermal_tools as tt
-
+if platform.system() == 'Windows':
+    import win32gui
+    import win32con
 # paths
 ir_xml_path = res.find('other/cam_calib_m2t_opencv.xml')
 rgb_xml_path = res.find('other/rgb_cam_calib_m2t_opencv.xml')

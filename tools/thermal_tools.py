@@ -21,17 +21,22 @@ import cv2
 # custom libraries
 import resources as res
 
-# paths
-sdk_tool_path = Path(res.find('dji/dji_irp.exe'))
-m2t_ir_xml_path = res.find('other/cam_calib_m2t_opencv.xml')
-m2t_rgb_xml_path = res.find('other/rgb_cam_calib_m2t_opencv.xml')
+# Get the current directory as the base directory
+base_dir = os.getcwd()
 
-m3t_ir_xml_path = res.find('other/cam_calib_m3t_opencv.xml')
-m3t_rgb_xml_path = res.find('other/rgb_cam_calib_m3t_opencv.xml')
+# Set the relative paths to the required files
+sdk_tool_path = os.path.join(base_dir, "resources", "dji", "dji_irp")
+m2t_ir_xml_path = os.path.join(base_dir, "resources", "other", "cam_calib_m2t_opencv.xml")
+m2t_rgb_xml_path = os.path.join(base_dir, "resources", "other", "rgb_cam_calib_m2t_opencv.xml")
+m3t_ir_xml_path = os.path.join(base_dir, "resources", "other", "cam_calib_m3t_opencv.xml")
+m3t_rgb_xml_path = os.path.join(base_dir, "resources", "other", "rgb_cam_calib_m3t_opencv.xml")
+POTREE_CONV_PATH = os.path.join(base_dir, "PotreeConverter", "build", "Converter")
 
-POTREE_CONV_PATH = res.find('PotreeConverter/PotreeConverter.exe')
-
-
+# Convert the paths to the appropriate format based on the operating system
+if os.name == "nt":  # Windows
+    sdk_tool_path += ".exe"
+    POTREE_CONV_PATH += ".exe"
+    
 # long tasks runner classes
 # test with runner
 class RunnerSignals(QtCore.QObject):
